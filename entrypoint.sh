@@ -41,4 +41,4 @@ rm -rf /run/apache2/apache2.pid
 # Enabling PHP mod rewrite
 /usr/sbin/a2enmod rewrite && /etc/init.d/apache2 restart
 
-#tail -F /var/log/apache2/*
+tail -F /var/log/apache2/*
