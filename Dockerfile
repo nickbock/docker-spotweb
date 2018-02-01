@@ -21,7 +21,7 @@ RUN echo "force-unsafe-io" > /etc/dpkg/dpkg.cfg.d/02apt-speedup &&\
 
 RUN git clone -b master --single-branch https://github.com/spotweb/spotweb.git /var/www/spotweb && \
     rm -rf /var/www/spotweb/.git && \
-    mkdir /var/www/spotweb/cache
+    mkdir /var/www/spotweb/cache && \
     chmod -R 775 /var/www/spotweb && \
     chown -R www-data:www-data /var/www/spotweb
 
