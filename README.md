@@ -30,14 +30,14 @@ When you are done, exit the container (CTRL/CMD-c) and configure the permanent r
 	docker run --restart=always -d -p 80:80 \
 		--hostname=spotweb \
 		--name=spotweb \
-		-v <hostdir_where_config_will_persistently_be_stored>:/config \
+		-v <hostdir_where_config_will_persistently_be_stored>:/var/www/spotweb \
 		-e TZ='Europe/Amsterdam' \
 		-e SPOTWEB_DB_TYPE=pdo_mysql \
 		-e SPOTWEB_DB_HOST=<database_server_hostname> \
 		-e SPOTWEB_DB_NAME=spotweb \
 		-e SPOTWEB_DB_USER=spotweb \
 		-e SPOTWEB_DB_PASS=spotweb \
-		jgeusebroek/spotweb
+		nickbock/docker-spotweb
 
 Please NOTE that the volume is optional. Only necessary when you have special configuration settings.
 
@@ -67,7 +67,3 @@ The container will try to auto-update the database when a newer version is relea
 ## License
 
 MIT / BSD
-
-## Author Information
-
-[Jeroen Geusebroek](https://jeroengeusebroek.nl/)

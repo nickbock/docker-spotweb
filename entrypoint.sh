@@ -33,7 +33,7 @@ echo -e "Setting (PHP) time zone to ${TZ}\n"
 sed -i "s#^;date.timezone =.*#date.timezone = ${TZ}#g"  /etc/php/7.*/*/php.ini
 
 # Run database update
-/usr/bin/php /var/www/spotweb/bin/upgrade-db.php >/dev/null 2>&1
+/usr/bin/php /var/www/spotweb/bin/upgrade-db.php
 
 # Clean up apache pid (if there is one)
 rm -rf /run/apache2/apache2.pid
@@ -41,4 +41,4 @@ rm -rf /run/apache2/apache2.pid
 # Enabling PHP mod rewrite
 /usr/sbin/a2enmod rewrite && /etc/init.d/apache2 restart
 
-tail -F /var/log/apache2/*
+#tail -F /var/log/apache2/*

@@ -21,6 +21,7 @@ RUN echo "force-unsafe-io" > /etc/dpkg/dpkg.cfg.d/02apt-speedup &&\
 
 RUN git clone -b master --single-branch https://github.com/spotweb/spotweb.git /var/www/spotweb && \
     rm -rf /var/www/spotweb/.git && \
+    mkdir /var/www/spotweb/cache
     chmod -R 775 /var/www/spotweb && \
     chown -R www-data:www-data /var/www/spotweb
 
@@ -28,7 +29,7 @@ COPY ./entrypoint.sh /entrypoint.sh
 RUN chmod u+x /entrypoint.sh
 
 # Updating hourly cron
-RUN (crontab -l ; echo "0 * * * * /usr/bin/php /var/www/spotweb/retrieve.php | tee /var/log/spotweb-retrieve.log") | crontab -
+RUN (crontab -l ; echo "0 */4 * * * /usr/bin/php /var/www/spotweb/retrieve.php | tee /var/log/spotweb-retrieve.log") | crontab -
 
 COPY files/000-default.conf /etc/apache2/sites-enabled/000-default.conf
 
