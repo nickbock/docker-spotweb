@@ -29,11 +29,12 @@ COPY ./entrypoint.sh /entrypoint.sh
 RUN chmod u+x /entrypoint.sh
 
 # Updating hourly cron
-RUN (crontab -l ; echo "0 */4 * * * /usr/bin/php /var/www/spotweb/retrieve.php | tee /var/log/spotweb-retrieve.log") | crontab -
+RUN touch /var/log/spotweb-retrieve.log
+RUN (crontab -l ; echo "1 * * * * /usr/bin/php /var/www/spotweb/retrieve.php > /var/log/spotweb-retrieve.log") | crontab -
 
 COPY files/000-default.conf /etc/apache2/sites-enabled/000-default.conf
 
-VOLUME [ "/config" ]
+VOLUME [ "/var/www/spotweb" ]
 
 EXPOSE 80
 
