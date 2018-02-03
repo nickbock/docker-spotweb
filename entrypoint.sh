@@ -1,8 +1,12 @@
 #!/bin/bash
 
-#if [ ! -f /config/ownsettings.php ] && [ -f /var/www/spotweb/ownsettings.php ]; then
-#  cp /var/www/spotweb/ownsettings.php /config/ownsettings.php
-#fi
+if [ ! -f /var/www/spotweb/ownsettings.php ]; then
+  touch /var/www/spotweb/ownsettings.php 
+fi
+
+if [ ! -f /var/www/spotweb/dbsettings.inc.php ]; then
+  touch /var/www/spotweb/dbsettings.inc.php 
+fi
 
 #touch /config/ownsettings.php && chown www-data:www-data /config/ownsettings.php
 #rm -f /var/www/spotweb/ownsettings.php
@@ -41,4 +45,4 @@ rm -rf /run/apache2/apache2.pid
 # Enabling PHP mod rewrite
 /usr/sbin/a2enmod rewrite && /etc/init.d/apache2 restart
 
-tail -F /var/log/var/log/spotweb-retrieve.log
+tail -F /var/log/spotweb-retrieve.log
