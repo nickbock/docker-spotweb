@@ -45,6 +45,6 @@ rm -rf /run/apache2/apache2.pid
 # Enabling PHP mod rewrite
 #/usr/sbin/a2enmod rewrite && /etc/init.d/apache2 restart
 
-dockerize /bin/bash -c "cron && source /etc/apache2/envvars && rm -f /var/run/apache2/apache2.pid && apachectl -k restart -DFOREGROUND | true"
+dockerize /bin/bash -c "cron && (crontab -l ; echo "* * * * * /usr/bin/php /var/www/spotweb/retrieve.php > /var/log/spotweb-retrieve.log") | crontab - && source /etc/apache2/envvars && rm -f /var/run/apache2/apache2.pid && apachectl -k restart -DFOREGROUND | true"
 
 #tail -F /var/log/spotweb-retrieve.log

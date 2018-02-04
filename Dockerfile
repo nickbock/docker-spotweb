@@ -33,7 +33,7 @@ RUN /usr/sbin/a2enmod rewrite
 
 # Updating hourly cron
 RUN touch /var/log/spotweb-retrieve.log
-RUN (crontab -l ; echo "* * * * * /usr/bin/php /var/www/spotweb/retrieve.php >> tee /var/log/spotweb-retrieve.log") | crontab -
+#RUN (crontab -l ; echo "* * * * * /usr/bin/php /var/www/spotweb/retrieve.php > /var/log/spotweb-retrieve.log") | crontab -
 
 COPY files/000-default.conf /etc/apache2/sites-enabled/000-default.conf
 
