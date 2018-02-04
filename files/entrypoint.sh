@@ -43,6 +43,8 @@ sed -i "s#^;date.timezone =.*#date.timezone = ${TZ}#g"  /etc/php/7.*/*/php.ini
 rm -rf /run/apache2/apache2.pid
 
 # Enabling PHP mod rewrite
-/usr/sbin/a2enmod rewrite && /etc/init.d/apache2 restart
+#/usr/sbin/a2enmod rewrite && /etc/init.d/apache2 restart
 
-tail -F /var/log/spotweb-retrieve.log
+dockerize /bin/bash -c "cron && source /etc/apache2/envvars && rm -f /var/run/apache2/apache2.pid && apachectl -k restart -DFOREGROUND | true"
+
+#tail -F /var/log/spotweb-retrieve.log
